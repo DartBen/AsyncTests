@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncTest", "AsyncTest\AsyncTest.csproj", "{58DC2B3B-214E-48F1-9A0D-02371D17D983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncTest", "AsyncTest\AsyncTest.csproj", "{58DC2B3B-214E-48F1-9A0D-02371D17D983}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23260F15-A28C-48F1-A098-CA52BA8776B9} = {23260F15-A28C-48F1-A098-CA52BA8776B9}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{23260F15-A28C-48F1-A098-CA52BA8776B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{23260F15-A28C-48F1-A098-CA52BA8776B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

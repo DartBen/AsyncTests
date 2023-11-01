@@ -1,0 +1,2 @@
+C:\prj\buff\AsyncTest\AsyncTest\ConsoleApp1\bin\Release\net7.0\publish\win-x64\ConsoleApp1.pdb
+C:\prj\buff\AsyncTest\AsyncTest\ConsoleApp1\bin\Release\net7.0\publish\win-x64\ConsoleApp1.exe

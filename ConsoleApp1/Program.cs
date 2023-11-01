@@ -2,35 +2,35 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
 
-            Task sleeper = Task.Factory.StartNew(() => { Thread.Sleep(10000); Console.WriteLine("sleeper ended"); });
+            Console.WriteLine(args[0]);
+            Console.WriteLine(args[1]);
 
-            int index = Task.WaitAny(new[] { sleeper },
-                                     TimeSpan.FromSeconds(2));
-            Console.WriteLine(index); // Prints -1, timeout
-            Console.WriteLine("sleeper status : " + sleeper.Status);
-            var cts = new CancellationTokenSource();
-
-            // Just a simple wait of getting a cancellable task
-            Task cancellable = sleeper.ContinueWith(ignored => { }, cts.Token);
-            Console.WriteLine("sleeper status : " + sleeper.Status);
-            // It doesn't matter that we cancel before the wait
-            cts.Cancel();
-            Console.WriteLine("sleeper status : " + sleeper.Status);
-            index = Task.WaitAny(new[] { cancellable },
-                                 TimeSpan.FromSeconds(0.5));
-            Console.WriteLine(index); // 0 - task 0  has completed (ish :)
-            Console.WriteLine(cancellable.Status); // Cancelled
-            Console.WriteLine("sleeper status : " + sleeper.Status);
+            await Program.TestTask(int.Parse(args[0]), int.Parse(args[1]));
+        }
 
 
+        static async Task TestTask(int delay1,int delay2)
+        {
+            var parentTask = Task.Run(() =>
+            {
+                Console.WriteLine("Родительский Task начало");
+                Task.Delay(delay1).Wait(); // Родительский Task с задержкой 2 секунды.
+                Console.WriteLine("Родительский Task конец");
+            });
 
+            var childTask = parentTask.ContinueWith(t =>
+            {
+                Console.WriteLine("Дочерний Task начало");
+                Task.Delay(delay2).Wait(); // Дочерний Task с задержкой 4 секунды.
+                Console.WriteLine("Дочерний Task конец");
+            }, TaskContinuationOptions.AttachedToParent);
 
-            Thread.Sleep(15000);
-            Console.WriteLine("sleeper status : " + sleeper.Status);
+            await parentTask; // Дожидаемся завершения родительского Task.
+
+            Console.WriteLine("Весь процесс завершен.");
         }
     }
 }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
-
+using System.Diagnostics;
 
 namespace AsyncTest.Controllers
 {
@@ -53,8 +53,8 @@ namespace AsyncTest.Controllers
             });
             Task<string> tmp2 = null;
 
-            var task =new Task(() => tmp2=LogicTask(15000, 
-                cancellationToken),cancellationToken, 
+            var task = new Task(() => tmp2 = LogicTask(15000,
+                cancellationToken), cancellationToken,
                 TaskCreationOptions.AttachedToParent);
 
             task.Start();
@@ -85,10 +85,48 @@ namespace AsyncTest.Controllers
             Thread.Sleep(sleepTime);
 
             result = "LogicTask конец - отмена не прошла";
-            
+
             return result;
         }
 
+        [HttpGet]
+        [Route("Main")]
+        public async Task Main()
+        {
+            using (var procces = new Process())
+            {
+                string path = Path.Combine(@"C:\prj\buff\AsyncTest\AsyncTest\ConsoleApp1\bin\Release\net7.0\publish\win-x64\ConsoleApp1.exe");
+
+                procces.StartInfo.FileName = path;
+                int dalay1 = 2000;
+                int dalay2 = 4000;
+                procces.StartInfo.Arguments = string.Format($"{dalay1.ToString()} {dalay2.ToString()}");
+
+                procces.Start();
+
+            }
+        }
+
+        private async Task task1()
+        {
+            var parentTask = Task.Run(() =>
+            {
+                Console.WriteLine("Родительский Task начало");
+                Task.Delay(2000).Wait(); // Родительский Task с задержкой 2 секунды.
+                Console.WriteLine("Родительский Task конец");
+            });
+
+            var childTask = parentTask.ContinueWith(t =>
+            {
+                Console.WriteLine("Дочерний Task начало");
+                Task.Delay(4000).Wait(); // Дочерний Task с задержкой 4 секунды.
+                Console.WriteLine("Дочерний Task конец");
+            }, TaskContinuationOptions.AttachedToParent);
+
+            await parentTask; // Дожидаемся завершения родительского Task.
+
+            Console.WriteLine("Весь процесс завершен.");
+        }
 
         static void test()
         {
