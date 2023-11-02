@@ -40,40 +40,44 @@ namespace AsyncTest.Controllers
             string result = null;
             result = "Было";
 
-            CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(10000));
+            CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(5000));
             CancellationToken cancellationToken = cts.Token;
+
+            string tmp2 = null;
+
+            var task = new Task(() =>
+                tmp2 = LogicTask(15000, cancellationToken),
+                cancellationToken,
+                TaskCreationOptions.AttachedToParent);
+
+            task.Start();
 
             var tokenTask = Task.Run(() =>
             {
                 while (true)
                 {
-                    if (cancellationToken.IsCancellationRequested)
-                        return new OperationCanceledException();
+                    //if (cancellationToken.IsCancellationRequested)
+                    //    break;
                 }
             });
-            Task<string> tmp2 = null;
-
-            var task = new Task(() => tmp2 = LogicTask(15000,
-                cancellationToken), cancellationToken,
-                TaskCreationOptions.AttachedToParent);
-
-            task.Start();
-
-
-            Task.WaitAny(task, tokenTask);
+            Task[] tasks = new Task[2] {task, tokenTask };
+           var wa= Task.WaitAny(tasks, cancellationToken);
 
             if (tokenTask.IsCompleted)
             {
                 result = "сработала отмена по токену";
+                //task.Wait(100);
+                //task.WaitAsync(cancellationToken);
+                task.Dispose();
             }
 
             if (task.IsCompleted)
-                return tmp2.Result;
+                return tmp2;
 
             return result;
         }
 
-        private async Task<string> LogicTask(int sleepTime, CancellationToken token)
+        private string LogicTask(int sleepTime, CancellationToken token)
         {
 
             token.ThrowIfCancellationRequested();
@@ -83,7 +87,7 @@ namespace AsyncTest.Controllers
             string result = "LogicTask начало";
 
             Thread.Sleep(sleepTime);
-
+            token.ThrowIfCancellationRequested();
             result = "LogicTask конец - отмена не прошла";
 
             return result;
@@ -109,7 +113,7 @@ namespace AsyncTest.Controllers
 
         private async Task task1()
         {
-            var parentTask = Task.Run(() =>
+            var parentTask = new Task(() =>
             {
                 Console.WriteLine("Родительский Task начало");
                 Task.Delay(2000).Wait(); // Родительский Task с задержкой 2 секунды.
@@ -122,6 +126,8 @@ namespace AsyncTest.Controllers
                 Task.Delay(4000).Wait(); // Дочерний Task с задержкой 4 секунды.
                 Console.WriteLine("Дочерний Task конец");
             }, TaskContinuationOptions.AttachedToParent);
+
+            parentTask.Start();
 
             await parentTask; // Дожидаемся завершения родительского Task.
 

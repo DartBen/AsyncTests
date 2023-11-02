@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncTest", "AsyncTest\Asyn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{23260F15-A28C-48F1-A098-CA52BA8776B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabrU1", "HabrU1\HabrU1.csproj", "{DD17602C-3725-4A3A-A3F3-36466A0A9753}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{23260F15-A28C-48F1-A098-CA52BA8776B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23260F15-A28C-48F1-A098-CA52BA8776B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23260F15-A28C-48F1-A098-CA52BA8776B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD17602C-3725-4A3A-A3F3-36466A0A9753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD17602C-3725-4A3A-A3F3-36466A0A9753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD17602C-3725-4A3A-A3F3-36466A0A9753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD17602C-3725-4A3A-A3F3-36466A0A9753}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

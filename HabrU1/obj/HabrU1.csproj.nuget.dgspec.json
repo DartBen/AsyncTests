@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\prj\\buff\\AsyncTest\\AsyncTest\\AsyncTest\\AsyncTest.csproj": {}
+    "C:\\prj\\buff\\AsyncTest\\AsyncTest\\HabrU1\\HabrU1.csproj": {}
   },
   "projects": {
-    "C:\\prj\\buff\\AsyncTest\\AsyncTest\\AsyncTest\\AsyncTest.csproj": {
+    "C:\\prj\\buff\\AsyncTest\\AsyncTest\\HabrU1\\HabrU1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\prj\\buff\\AsyncTest\\AsyncTest\\AsyncTest\\AsyncTest.csproj",
-        "projectName": "AsyncTest",
-        "projectPath": "C:\\prj\\buff\\AsyncTest\\AsyncTest\\AsyncTest\\AsyncTest.csproj",
+        "projectUniqueName": "C:\\prj\\buff\\AsyncTest\\AsyncTest\\HabrU1\\HabrU1.csproj",
+        "projectName": "HabrU1",
+        "projectPath": "C:\\prj\\buff\\AsyncTest\\AsyncTest\\HabrU1\\HabrU1.csproj",
         "packagesPath": "C:\\Users\\ryabc\\.nuget\\packages\\",
-        "outputPath": "C:\\prj\\buff\\AsyncTest\\AsyncTest\\AsyncTest\\obj\\",
+        "outputPath": "C:\\prj\\buff\\AsyncTest\\AsyncTest\\HabrU1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,16 +44,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[7.0.12, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -66,9 +56,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
